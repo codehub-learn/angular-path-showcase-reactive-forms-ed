@@ -1,0 +1,20 @@
+<form method="get" [formGroup]="userRegistrationForm" (ngSubmit)="onSubmit()">
+  <input type="text" name="firstname" formControlName="firstname">
+  <span *ngIf="userRegistrationForm.get('firstname')?.hasError('pattern')">Should not have numbers</span>
+  <br>
+  <input type="text" name="lastname" formControlName="lastname">
+  <span *ngIf="userRegistrationForm.get('lastname')?.touched
+  && userRegistrationForm.get('lastname')?.hasError('required')">Required</span>
+  <br>
+  Receive emails
+  <input type="checkbox" formControlName="receiveEmails">
+  <br>
+  Male
+  <input type="radio" name="gender" value="male" formControlName="gender">
+  Female
+  <input type="radio" name="gender" value="female" formControlName="gender">
+  Other
+  <input type="radio" name="gender" value="other" formControlName="gender">
+  <br>
+  <button type="submit" >Register</button>
+</form>
