@@ -22,15 +22,15 @@
   </div>
   <div formArrayName="telephones">
     <ng-container *ngFor="let telephone of telephones.controls; let i=index">
-      <input formControlName="{{i}}"><button (click)="removeTelephoneNumberAt(i)">Del</button>
+      <input formControlName="{{i}}">
+      <ng-template *ngIf="telephones.length !== 1;then deleteButtonBlock"></ng-template>
+      <ng-template #deleteButtonBlock>
+        <button (click)="removeTelephoneNumberAt(i)" [disabled]="telephones.length === 1">Del</button>
+      </ng-template>
     </ng-container>
     <div>
       <button (click)="addTelephoneNumber()">Add Telephone Number</button>
     </div>
-    <!--
-    <ng-template *ngIf="true; then testBlock"></ng-template>
-    <ng-template #testBlock>test</ng-template>
-    -->
   </div>
   <div>
     <input type="submit" value="Submit Form">
