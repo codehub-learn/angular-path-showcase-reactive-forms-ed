@@ -3,9 +3,13 @@
   <div formGroupName="fullname">
     <input type="text" formControlName="firstname">
     <input type="text" formControlName="lastname">
+    <div *ngIf="firstname.hasError('required') && firstname.touched" style="color: darkred">Firstname is required</div>
+    <div *ngIf="lastname.hasError('required') && lastname.touched" style="color: darkred">Lastname is required</div>
   </div>
   <div>
     <input type="text" formControlName="email">
+    <div *ngIf="email.hasError('required') && email.touched" style="color: darkred">Email is required</div>
+    <div *ngIf="email.hasError('email') && email.touched" style="color: darkred">Please input a proper email</div>
   </div>
   <div>
     <input type="radio" name="gender" formControlName="gender" value="male"> Male
@@ -25,12 +29,15 @@
       <input formControlName="{{i}}">
       <ng-template *ngIf="telephones.length !== 1;then deleteButtonBlock"></ng-template>
       <ng-template #deleteButtonBlock>
-        <button (click)="removeTelephoneNumberAt(i)" [disabled]="telephones.length === 1">Del</button>
+        <button type="button" (click)="removeTelephoneNumberAt(i)" [disabled]="telephones.length === 1">Del</button>
       </ng-template>
     </ng-container>
     <div>
-      <button (click)="addTelephoneNumber()">Add Telephone Number</button>
+      <button type="button" (click)="addTelephoneNumber()">Add Telephone Number</button>
     </div>
+  </div>
+  <div *ngIf="isFormIncorrect" style="color: darkred">
+    The form is invalid, please correct the mistakes
   </div>
   <div>
     <input type="submit" value="Submit Form">
