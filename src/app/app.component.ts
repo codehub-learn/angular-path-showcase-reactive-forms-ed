@@ -11,11 +11,20 @@ export class AppComponent {
   form!: FormGroup;
 
   constructor() {
+    this.setFormInitialValues();
   }
 
   private setFormInitialValues(){
     this.form = new FormGroup<any>({
-      fullname: new FormControl()
+      fullname: new FormGroup({
+        firstname: new FormControl(),
+        lastname: new FormControl()
+      }),
+      email: new FormControl()
     });
+  }
+
+  onSubmit() {
+    console.log(this.form.get("fullname")?.get("firstname")?.value);
   }
 }
