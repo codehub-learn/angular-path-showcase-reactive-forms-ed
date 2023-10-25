@@ -4,9 +4,37 @@
     <input type="text" formControlName="firstname">
     <input type="text" formControlName="lastname">
   </div>
-  <input type="text" formControlName="email">
-  <br>
-  <input type="submit" value="Submit Form">
+  <div>
+    <input type="text" formControlName="email">
+  </div>
+  <div>
+    <input type="radio" name="gender" formControlName="gender" value="male"> Male
+    <input type="radio" name="gender" formControlName="gender" value="female"> Female
+    <input type="radio" name="gender" formControlName="gender" value="other"> Other
+  </div>
+  <div>
+    <input type="checkbox" formControlName="receiveEmails"> Want to receive emails?
+  </div>
+  <div>
+    <select formControlName="region">
+      <option *ngFor="let region of regions" value="{{region}}">{{region}}</option>
+    </select>
+  </div>
+  <div formArrayName="telephones">
+    <ng-container *ngFor="let telephone of telephones.controls; let i=index">
+      <input formControlName="{{i}}"><button (click)="removeTelephoneNumberAt(i)">Del</button>
+    </ng-container>
+    <div>
+      <button (click)="addTelephoneNumber()">Add Telephone Number</button>
+    </div>
+    <!--
+    <ng-template *ngIf="true; then testBlock"></ng-template>
+    <ng-template #testBlock>test</ng-template>
+    -->
+  </div>
+  <div>
+    <input type="submit" value="Submit Form">
+  </div>
 </form>
 
 
